@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Shipment Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e2f0d9;
+            border: 1px solid #c8e6b1;
+            color: #385723;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>E-Commerce Shipment Delay Prediction</h2>
+    
+    <form action="/predict" method="POST">
+        
+        <div class="form-group">
+            <label>Warehouse Block (A, B, C, D, F):</label>
+            <input type="text" name="Warehouse_block" value="{{ request.form.Warehouse_block }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Mode of Shipment (Flight, Ship, Road):</label>
+            <input type="text" name="Mode_of_Shipment" value="{{ request.form.Mode_of_Shipment }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Customer Care Calls:</label>
+            <input type="text" name="Customer_care_calls" value="{{ request.form.Customer_care_calls }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Customer Rating (1 to 5):</label>
+            <input type="text" name="Customer_rating" value="{{ request.form.Customer_rating }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Cost of the Product:</label>
+            <input type="text" name="Cost_of_the_Product" value="{{ request.form.Cost_of_the_Product }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Prior Purchases:</label>
+            <input type="text" name="Prior_purchases" value="{{ request.form.Prior_purchases }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Product Importance (Low: 0, Medium: 1, High: 2):</label>
+            <input type="text" name="Product_importance" value="{{ request.form.Product_importance }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Gender (F or M):</label>
+            <input type="text" name="Gender" value="{{ request.form.Gender }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Discount Offered:</label>
+            <input type="text" name="Discount_offered" value="{{ request.form.Discount_offered }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Weight in gms:</label>
+            <input type="text" name="Weight_in_gms" value="{{ request.form.Weight_in_gms }}" required>
+        </div>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction_text %}
+        <div class="result">
+            {{ prediction_text }}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
